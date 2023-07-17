@@ -117,7 +117,7 @@ services:
             - './docker/minio:/etc/minio'
         networks:
             - sail
-        entrypoint: /etc/minio/create_bucket.sh
+#        entrypoint: /etc/minio/create_bucket.sh
     phpmyadmin:
         depends_on:
             - mysql
