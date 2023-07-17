@@ -32,8 +32,6 @@ class TestAppCommand extends Command
 //                ->format('Letter')
 //                ->savePdf($path);
 
-
-
 //            $f = resolve(FeedReader::class);
 ////            $r = $f->read('https://news.google.com/news/rss');
 ////            $r = $f->read('https://www.techmeme.com/feed.xml');
@@ -45,6 +43,7 @@ class TestAppCommand extends Command
 ////            $r = $f->read('https://feeds.npr.org/1001/rss.xml');
 ////            $r = $f->read('https://wsvn.com/feed/');
 ////            $r = $f->read('https://www.youtube.com/feeds/videos.xml?channel_id=UCD88k6KX9chc-KgEOuSJSVw');
+//            $r = $f->read('http://private-feeds.lan/feed');
 //
 //            echo $r->get_title() . PHP_EOL . PHP_EOL;
 //
@@ -61,11 +60,15 @@ class TestAppCommand extends Command
 //                }
 //                echo "Enclosure Thumbnails: " . print_r($item->get_enclosure()?->thumbnails, true) . PHP_EOL . PHP_EOL;
 //                echo "Date: " . $item->get_date('Y-m-d H:i:s') . PHP_EOL . PHP_EOL;
-////                echo "Enclosures: " . print_r($item->get_enclosures(), true) . PHP_EOL . PHP_EOL;
-//                echo "Data: " . print_r($item->data, true) . PHP_EOL . PHP_EOL;
+//                echo "Author: " . $item->get_author()?->name . PHP_EOL . PHP_EOL;
+//                echo "Categories: " . print_r($item->get_categories(), true) . PHP_EOL . PHP_EOL;
+//                echo "Enclosures: " . print_r($item->get_enclosures(), true) . PHP_EOL . PHP_EOL;
+//                echo "Links: " . print_r($item->get_links(), true) . PHP_EOL . PHP_EOL;
+//                echo "Data: " . trim($item->data['child']['http://www.w3.org/2005/Atom']['summary'][0]['data']) . PHP_EOL . PHP_EOL;
+////                echo "Data: " . print_r($item->data, true) . PHP_EOL . PHP_EOL;
 //
 //                $this->line("\n");
-//                break;
+////                break;
 //            }
 //
 //            $this->info(count($r->get_items()));
