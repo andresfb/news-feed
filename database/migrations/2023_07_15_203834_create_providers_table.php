@@ -8,10 +8,10 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('providers', function (Blueprint $table) {
+        Schema::create('providers', static function (Blueprint $table) {
             $table->id();
-            $table->string('Name', 100);
-            $table->text('Description')->nullable();
+            $table->string('name', 100);
+            $table->text('description')->nullable();
             $table->string('home_page');
             $table->softDeletes();
             $table->timestamps();

@@ -8,12 +8,12 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('articles', static function (Blueprint $table) {
             $table->id();
             $table->foreignId('feed_id')
                 ->constrained('feeds');
-            $table->string('title');
-            $table->string('permalink');
+            $table->string('title', 500);
+            $table->string('permalink', 500);
             $table->text('content')->nullable();
             $table->text('description')->nullable();
             $table->string('thumbnail')->nullable();

@@ -11,9 +11,14 @@ class Provider extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'Name',
-        'Description',
+        'name',
+        'description',
         'home_page',
+        'status',
+    ];
+
+    protected $casts = [
+        'status' => 'boolean',
     ];
 
     public function feeds(): HasMany

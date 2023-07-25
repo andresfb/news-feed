@@ -28,7 +28,7 @@ return [
                  *
                  * @var int
                  */
-                'duration' => 3600,
+                'duration' => 1800,
 
                 /**
                  * Whether caching is enabled.

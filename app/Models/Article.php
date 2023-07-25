@@ -7,14 +7,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Tags\HasTags;
 
 class Article extends Model implements HasMedia
 {
     use SoftDeletes;
     use InteractsWithMedia;
+    use HasTags;
 
     protected $fillable = [
         'feed_id',
+        'hash',
         'title',
         'permalink',
         'content',
@@ -25,6 +28,7 @@ class Article extends Model implements HasMedia
     ];
 
     protected $casts = [
+        'data' => 'json',
         'read_at' => 'datetime',
     ];
 

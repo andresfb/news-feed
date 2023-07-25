@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FrontPageController;
+use App\Http\Controllers\TrackController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [FrontPageController::class, 'index'])->name('frontpage');
+
+Route::get('/track/{article}', TrackController::class)->name('track');
+

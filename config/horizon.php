@@ -202,7 +202,8 @@ return [
                 'queue' => ['default'],
                 'balance' => 'auto',
                 'minProcesses' => 1,
-                'maxProcesses' => 5,
+                'maxProcesses' => 2,
+                'timeout' => 600,
                 'tries' => 1,
             ],
 
@@ -223,7 +224,8 @@ return [
                 'queue' => ['default'],
                 'balance' => 'auto',
                 'minProcesses' => 1,
-                'maxProcesses' => 2,
+                'maxProcesses' => 1,
+                'timeout' => 300,
                 'tries' => 1,
             ],
 
