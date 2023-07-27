@@ -54,10 +54,10 @@ Temporary Items
 
 # Custom Values
 .sync/
-.env.production
 contruction/
 webfonts
 laradock
 _ide_helper.php
 _ide_helper_models.php
 .phpstorm.meta.php
+public/vendor

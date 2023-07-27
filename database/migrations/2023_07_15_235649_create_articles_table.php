@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('permalink', 500);
             $table->text('content')->nullable();
             $table->text('description')->nullable();
-            $table->string('thumbnail')->nullable();
+            $table->string('thumbnail', 500)->nullable();
             $table->longText('data')->nullable();
             $table->dateTime('read_at')->nullable();
 

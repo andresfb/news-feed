@@ -25,11 +25,13 @@ class Article extends Model implements HasMedia
         'thumbnail',
         'data',
         'read_at',
+        'published_at',
     ];
 
     protected $casts = [
         'data' => 'json',
         'read_at' => 'datetime',
+        'published_at' => 'datetime',
     ];
 
     public function feed(): BelongsTo

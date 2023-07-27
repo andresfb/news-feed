@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+a {
+    @apply text-blue-600 hover:text-blue-800 ;
+}
+
+.menu-selected {
+    @apply text-xs lg:text-sm text-blue-900 border-b-2 border-b-fuchsia-900;
+}
+
+.menu {
+    @apply text-xs lg:text-sm text-gray-500 hover:text-blue-800 ;
+}

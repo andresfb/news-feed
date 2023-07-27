@@ -3,16 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Services\ArticlesService;
+use Illuminate\View\View;
 
 class FrontPageController extends Controller
 {
-    public function index(ArticlesService $service)
+    public function index(ArticlesService $service): View
     {
-        $articles = $service->getRandomList();
-
-        dd($articles);
-
         return view('frontpage')
-            ->with('articles', $articles);
+            ->with('articles', $service->getRandomList());
     }
 }

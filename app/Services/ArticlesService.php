@@ -11,7 +11,8 @@ class ArticlesService
 {
     public function getRandomList(): Collection
     {
-//        return Cache::remember('all-articles', now()->addMinutes(30), static function () {
+        return Cache::tags('all-articles')
+            ->remember('all-articles', now()->addMinutes(15), static function () {
             $articles = collect();
             $providers = Provider::whereStatus(true)->get();
 
@@ -26,7 +27,7 @@ class ArticlesService
                         ->with('feed')
                         ->with('feed.provider')
                         ->whereNull('read_at')
-                        ->where('created_at', '>=', now()->startOfDay())
+                        ->where('created_at', '>=', now()->subHours(6))
                         ->latest()
                         ->limit(30)
                         ->get()
@@ -44,11 +45,12 @@ class ArticlesService
                     'content' => $article->description ?? $article->content,
                     'thumbnail' => $article->thumbnail,
                     'provider' => $article->feed->provider->name,
+                    'provider_link' => $article->feed->provider->link,
                     'feed' => $article->feed->title,
-                    'tags' => $article->tags->pluck('name')->toArray(),
-                    'created_at' => $article->created_at->diffForHumans(),
+                    'tags' => $article->tags->pluck('name')->implode(', '),
+                    'published_at' => $article->published_at->diffForHumans(),
                 ];
             });
-//        });
+        });
     }
 }

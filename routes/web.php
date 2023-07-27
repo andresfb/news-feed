@@ -17,5 +17,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontPageController::class, 'index'])->name('frontpage');
 
+Route::get('/grouped', static function () {
+    echo 'not implemented yet';
+})->name('grouped');
+
+Route::get('/provider', static function () {
+    echo 'not implemented yet';
+})->name('provider');
+
+Route::get('/archive', static function () {
+    echo 'not implemented yet';
+})->name('archive');
+
 Route::get('/track/{article}', TrackController::class)->name('track');
 

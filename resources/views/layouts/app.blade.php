@@ -18,20 +18,19 @@
         @stack('scripts')
     </head>
 
-    <body class="font-sans antialiased bg-gray-100 body-margin-bottom">
+    <body class="font-mono antialiased bg-slate-100 body-margin-bottom">
 
-        <div class="flex flex-col h-screen">
+        <main class="container mx-auto 2xl:mx-96 p-1 ">
 
-{{--        <header class="bg-primary shadow">--}}
-{{--            @include('layouts.navigation')--}}
-{{--        </header>--}}
+            <x-header />
 
-            <!-- Page Content -->
-            <main class="flex-1 overflow-y-auto xl:px-28 px-3 lg:py-5 py-2">
+            <div class="bg-white mt-2 rounded-sm lg:rounded py-2 px-1 lg:px-2">
+                <x-menu />
+
                 {{ $slot }}
-            </main>
+            </div>
 
-        </div>
+        </main>
 
     </body>
 </html>

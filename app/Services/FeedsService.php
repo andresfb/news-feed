@@ -42,7 +42,7 @@ class FeedsService
 
         if ($result === null || $result->error()) {
             throw new \RuntimeException(
-                "@FeedsService.importFeed. Error imporing feed: {$feed->url} {$result->error()}"
+                "@FeedsService.importFeed. Error importing feed: {$feed->url} {$result->error()}"
             );
         }
 
