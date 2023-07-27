@@ -20,7 +20,7 @@
 
     <body class="font-mono antialiased bg-slate-100 body-margin-bottom">
 
-        <main class="container mx-auto 2xl:mx-96 p-1 ">
+        <main class="container mx-auto p-1">
 
             <x-header />
 

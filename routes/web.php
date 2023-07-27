@@ -18,14 +18,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontPageController::class, 'index'])->name('frontpage');
 
 Route::get('/grouped', static function () {
+    // TODO: implement grouped view
     echo 'not implemented yet';
 })->name('grouped');
 
 Route::get('/provider', static function () {
+    // TODO: implement provider view
     echo 'not implemented yet';
 })->name('provider');
 
 Route::get('/archive', static function () {
+    // TODO: implement archive view
     echo 'not implemented yet';
 })->name('archive');
 

@@ -9,7 +9,7 @@ export default {
                 primary: colors.blue,
                 success: colors.green,
                 warning: colors.yellow,
-            },
+            }
         },
     },
 }
