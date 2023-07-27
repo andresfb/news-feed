@@ -66,10 +66,10 @@ final class ArticleInfo implements Arrayable
     {
         return [
             'title' => $this->title,
-            'permalink' => $this->permalink,
+            'permalink' => str_replace('amp;', '', $this->permalink),
             'content' => $this->content,
             'description' => $this->description,
-            'thumbnail' => $this->thumbnail,
+            'thumbnail' => str_replace('amp;', '', $this->thumbnail),
             'data' => $this->data,
             'published_at' => $this->publishedAt,
         ];

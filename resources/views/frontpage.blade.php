@@ -26,7 +26,7 @@
                         <span class="text-xs lg:text-sm text-gray-500 font-semibold"><small>{{ $article['feed'] }}</small></span>
                     </div>
                     <div class="text-sm lg:text-base font-medium lg:font-semibold mt-1">
-                        <a href="{{ $article['link'] }}" target="_blank">{!! $article['title'] !!}</a>
+                        <a href="{{ $article['link'] }}" target="_blank">{!! html_entity_decode($article['title'], ENT_QUOTES, 'UTF-8') !!}</a>
                     </div>
                     <div class="text-xs lg:text-sm text-gray-500 mt-1">
                         {!! $article['content'] !!}

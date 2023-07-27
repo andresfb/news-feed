@@ -39,7 +39,6 @@ class FeedsService
         $reader = resolve(FeedReader::class);
         $result = $reader->read($feed->url);
 
-
         if ($result === null || $result->error()) {
             throw new \RuntimeException(
                 "@FeedsService.importFeed. Error importing feed: {$feed->url} {$result->error()}"
