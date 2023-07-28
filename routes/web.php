@@ -22,7 +22,7 @@ Route::get('/grouped', static function () {
     echo 'not implemented yet';
 })->name('grouped');
 
-Route::get('/provider', static function () {
+Route::get('/provider/{provider}', static function () {
     // TODO: implement provider view
     echo 'not implemented yet';
 })->name('provider');
