@@ -96,6 +96,7 @@ final class ArticleInfo implements Arrayable
         if (!empty($item->get_categories())) {
             $this->tags = collect($item->get_categories())
                 ->pluck('term')
+                ->filter()
                 ->toArray();
         }
     }

@@ -9,21 +9,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('providers', static function (Blueprint $table) {
-            $table->json('display_counts')
-                ->nullable()
-                ->after('status');
-
-            $table->integer('order')->default(0)
-                ->after('display_counts');
+            $table->dropColumn('display_counts');
         });
     }
 
     public function down(): void
     {
         Schema::table('providers', static function (Blueprint $table) {
-            $table->dropColumn('display_counts');
-
-            $table->dropColumn('order');
+            $table->json('display_counts')
+                ->nullable()
+                ->after('status');
         });
     }
 };

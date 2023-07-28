@@ -8,11 +8,11 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('feeds', function (Blueprint $table) {
+        Schema::create('feeds', static function (Blueprint $table) {
             $table->id();
             $table->foreignId('provider_id')
                 ->constrained('providers')
-                ->onDelete('cascade');
+                ->cascadeOnDelete();
             $table->string('title');
             $table->string('url', 500);
             $table->boolean('status')->default(true);

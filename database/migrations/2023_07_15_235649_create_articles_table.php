@@ -11,7 +11,8 @@ return new class extends Migration
         Schema::create('articles', static function (Blueprint $table) {
             $table->id();
             $table->foreignId('feed_id')
-                ->constrained('feeds');
+                ->constrained('feeds')
+                ->cascadeOnDelete();
             $table->string('title', 500);
             $table->string('permalink', 500);
             $table->text('content')->nullable();

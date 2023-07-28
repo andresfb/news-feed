@@ -13,8 +13,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // TODO: change the run hourly, but from 8 am to 10 pm
-        $schedule->job(resolve(ImportFeedsJob::class))->hourly();
+        $schedule->job(resolve(ImportFeedsJob::class))
+            ->hourly()
+            ->between('8:00', '22:00');
     }
 
     /**

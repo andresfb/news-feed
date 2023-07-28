@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class ImportFeedsJob implements ShouldQueue
@@ -30,6 +31,8 @@ class ImportFeedsJob implements ShouldQueue
     public function handle(): void
     {
         try {
+            Cache::tags('all_news')->flush();
+
             $feeds = $this->service->getFeeds();
             if ($feeds->isEmpty()) {
                 Log::info('No feeds to import');
