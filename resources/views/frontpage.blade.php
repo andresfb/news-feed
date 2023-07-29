@@ -1,4 +1,5 @@
 <x-app-layout>
+
     <section class="mt-3">
 
         <div class="flex justify-end mx-1">
@@ -46,4 +47,5 @@
         </ul>
 
     </section>
+
 </x-app-layout>

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -17,6 +18,7 @@ class Feed extends Model
         'provider_id',
         'title',
         'url',
+        'logo',
         'status',
         'refreshed_at',
     ];
@@ -24,6 +26,15 @@ class Feed extends Model
     protected $casts = [
         'refreshed_at' => 'datetime',
     ];
+
+    public function logo(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value
+                ? sprintf('%s/images/%s', config('app.url'), $value)
+                : config('articles.no_image_url'),
+        );
+    }
 
     public function provider(): BelongsTo
     {

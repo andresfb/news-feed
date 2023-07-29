@@ -114,7 +114,7 @@ final class ArticleInfo implements Arrayable
     {
         $html = $this->getHtmlValue($item);
         if ($html === strip_tags($html)) {
-            return config('articles.no_image_url');
+            return $this->feed->logo;
         }
 
         try {
@@ -122,16 +122,16 @@ final class ArticleInfo implements Arrayable
             $doc->loadHTML($html, LIBXML_NOERROR);
             $tags = $doc->getElementsByTagName('img');
             if ($tags->count() === 0) {
-                return config('articles.no_image_url');
+                return $this->feed->logo;
             }
 
             if (empty($tags[0]->getAttribute('src'))) {
-                return config('articles.no_image_url');
+                return $this->feed->logo;
             }
 
             return $tags[0]->getAttribute('src');
         } catch (Exception) {
-            return config('articles.no_image_url');
+            return $this->feed->logo;
         }
     }
 

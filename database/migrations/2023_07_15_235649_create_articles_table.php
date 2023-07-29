@@ -14,7 +14,7 @@ return new class extends Migration
                 ->constrained('feeds')
                 ->cascadeOnDelete();
             $table->string('title', 500);
-            $table->string('permalink', 500);
+            $table->string('permalink', 700);
             $table->text('content')->nullable();
             $table->text('description')->nullable();
             $table->string('thumbnail', 500)->nullable();

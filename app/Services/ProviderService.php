@@ -30,7 +30,7 @@ class ProviderService
             now()->addHours(24),
             function () {
                 return $this->getList()->keys()->map(function ($item) {
-                    return route('provider', $item);
+                    return sprintf('%s/provider/%s', config('app.url'), $item);
                 });
             }
         );
