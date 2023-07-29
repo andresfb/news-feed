@@ -6,7 +6,7 @@
 
     <div class="relative" x-data="{dropdownMenu: false}">
         <!-- Dropdown toggle button -->
-        <a href="#" class="flex items-center @if($providerRoutes->contains(request()->route())) menu-selected @else menu @endif" @click="dropdownMenu = !dropdownMenu">
+        <a href="#" class="flex items-center @if($providerRoutes->contains(url()->current())) menu-selected @else menu @endif" @click="dropdownMenu = !dropdownMenu">
             <span class="mr-0 lg:mr-0.5">Provider</span>
             <!-- Heroicon: chevron-down -->
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 lg:h-5 w-4 lg:w-5 mt-0.5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">

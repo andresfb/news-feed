@@ -65,6 +65,8 @@ final class ArticleInfo implements Arrayable
     public function toArray(): array
     {
         return [
+            'feed_id' => $this->feed->id,
+            'hash' => $this->hash,
             'title' => $this->title,
             'permalink' => str_replace('amp;', '', $this->permalink),
             'content' => $this->content,

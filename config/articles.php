@@ -8,7 +8,11 @@ return [
 
     'hours_to_go_back' => [
 
-        'all_news' => (int) env('ARTICLES_HOURS_TO_GO_BACK', 8),
+        'all_news' => (int) env('HOURS_TO_GO_BACK_ALL_NEWS', 8),
+
+        'grouped' => (int) env('HOURS_TO_GO_BACK_GROUPED', 16),
+
+        'provider' => (int) env('HOURS_TO_GO_BACK_PROVIDER', 24),
 
     ],
 

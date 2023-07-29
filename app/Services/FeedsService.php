@@ -52,11 +52,19 @@ class FeedsService
                 index: $key
             );
 
-            $article = Article::updateOrCreate([
-                'feed_id' => $feed->id,
-                'hash' => $info->getHash()
-            ], $info->toArray());
+            $article = Article::whereHash($info->getHash())->first();
+            if ($article !== null && $article->read_at !== null) {
+                continue;
+            }
 
+            if ($article !== null) {
+                $article->thumbnail ??= $feed->logo;
+                $article->updated_at = now();
+                $article->save();
+                continue;
+            }
+
+            $article = Article::create($info->toArray());
             if (empty($info->getTags())) {
                 continue;
             }
