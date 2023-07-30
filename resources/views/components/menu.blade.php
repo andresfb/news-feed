@@ -1,8 +1,8 @@
 <div class="flex justify-evenly align-baseline border-b border-b-gray-200">
 
-    <a href="{{ route('frontpage') }}" class="@if(request()->routeIs('frontpage')) menu-selected @else menu @endif">All News</a>
+    <a href="{{ route($allNewsMenu) }}" class="@if(request()->routeIs($allNewsMenu)) menu-selected @else menu @endif">All News</a>
 
-    <a href="{{ route('grouped') }}" class="@if(request()->routeIs('grouped')) menu-selected @else menu @endif">Grouped</a>
+    <a href="{{ route($groupedMenu) }}" class="@if(request()->routeIs($groupedMenu)) menu-selected @else menu @endif">Grouped</a>
 
     <div class="relative" x-data="{dropdownMenu: false}">
         <!-- Dropdown toggle button -->
@@ -16,13 +16,13 @@
         <!-- Dropdown list -->
         <div x-show="dropdownMenu" class="absolute right-0 py-2 mt-2 bg-gray-100 rounded-md shadow-xl w-48">
         @foreach($providers as $id => $provider)
-            <a href="{{ route('provider', $id) }}" class="block px-4 py-2 menu">
+            <a href="{{ route($providerMenu, $id) }}" class="block px-4 py-2 menu">
                 {{ $provider }}
             </a>
         @endforeach
         </div>
     </div>
 
-    <a href="{{ route('archive') }}" class="@if(request()->routeIs('archive')) menu-selected @else menu @endif">Archive</a>
+    <a href="{{ route($archiveMenu) }}" class="@if(request()->routeIs($archiveMenu)) menu-selected @else menu @endif">Archive</a>
 
 </div>

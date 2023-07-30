@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Emuns\PageName;
 use App\Models\Provider;
 use App\Services\ArticlesService;
 
@@ -12,8 +13,8 @@ class ProviderController extends Controller
         return view('provider')
             ->with([
                 'providers' => $service->getProvider($provider),
-                'provider_id' => $provider->id,
+                'providerId' => $provider->id,
+                'callPage' => PageName::Provider->value,
             ]);
-
     }
 }

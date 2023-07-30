@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -28,11 +29,32 @@ class Article extends Model implements HasMedia
         'published_at',
     ];
 
+    protected $hidden = ['data'];
+
     protected $casts = [
         'data' => 'json',
         'read_at' => 'datetime',
         'published_at' => 'datetime',
     ];
+
+    public function scopeGetArticle(Builder $query): Builder
+    {
+        return $query->select([
+            'id',
+            'feed_id',
+            'hash',
+            'title',
+            'permalink',
+            'content',
+            'description',
+            'thumbnail',
+            'read_at',
+            'published_at',
+            'deleted_at',
+            'created_at',
+            'updated_at',
+        ]);
+    }
 
     public function feed(): BelongsTo
     {
@@ -46,5 +68,21 @@ class Article extends Model implements HasMedia
         $this->addMediaCollection('pdf')
             ->singleFile()
             ->useDisk($mediaDisk);
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'link' => route('track', $this->id),
+            'content' => $this->description ?? $this->content,
+            'thumbnail' => $this->thumbnail,
+            'provider' => $this->feed->provider->name,
+            'provider_link' => $this->feed->provider->home_page ?? '',
+            'feed' => $this->feed->title,
+            'tags' => $this->tags->pluck('name')->implode(', '),
+            'published_at' => $this->published_at->diffForHumans(),
+        ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Emuns\PageName;
 use App\Models\Article;
 use App\Models\Feed;
 use App\Models\Provider;
@@ -12,18 +13,18 @@ class ArticlesService
 {
     public function getRandomList(): Collection
     {
-        return Cache::tags('all_news')->remember(
-            'all_news',
+        return Cache::tags(PageName::AllNews->value)->remember(
+            PageName::AllNews->value,
             now()->addMinutes(config('articles.cache_ttl_minutes')),
             function () {
                 $feeds = Feed::withActiveProvider()
-                    ->withFeedCount('all_news')
+                    ->withFeedCount(PageName::AllNews->value)
                     ->whereStatus(true)
                     ->get();
 
                 $articles = collect();
                 foreach ($feeds as $feed) {
-                    $items = $this->getArticles($feed, 'all_news');
+                    $items = $this->getArticles($feed, PageName::AllNews->value);
                     if ($items->isEmpty()) {
                         continue;
                     }
@@ -35,7 +36,7 @@ class ArticlesService
                     ->unique('id')
                     ->shuffle()
                     ->map(function (Article $article) {
-                        return $this->getFeedData($article);
+                        return $article->toArray();
                     });
             }
         );
@@ -43,8 +44,8 @@ class ArticlesService
 
     public function getGrouped(): Collection
     {
-        return Cache::tags('grouped')->remember(
-            'grouped',
+        return Cache::tags(PageName::Grouped->value)->remember(
+            PageName::Grouped->value,
             now()->addMinutes(config('articles.cache_ttl_minutes')),
             function () {
                 $providers = Provider::whereStatus(true)
@@ -57,7 +58,7 @@ class ArticlesService
 
                 $groups = [];
                 foreach ($providers as $provider) {
-                    $groups[] = $this->getProviderInfo($provider, 'grouped');
+                    $groups[] = $this->getProviderInfo($provider, PageName::Grouped->value);
                 }
 
                 return collect($groups);
@@ -67,11 +68,11 @@ class ArticlesService
 
     public function getProvider(Provider $provider): Collection
     {
-        return Cache::tags('provider')->remember(
-            "provider_{$provider->id}",
+        return Cache::tags(PageName::Provider->value)->remember(
+            sprintf("%s_%s", PageName::Provider->value, $provider->id),
             now()->addMinutes(config('articles.cache_ttl_minutes')),
             function () use ($provider){
-                $groups[] = $this->getProviderInfo($provider, 'provider');
+                $groups[] = $this->getProviderInfo($provider, PageName::Provider->value);
 
                 return collect($groups);
             }
@@ -106,7 +107,7 @@ class ArticlesService
                 'title' => $feed->title,
                 'logo' => $feed->logo,
                 'articles' => $this->getArticles($feed, $callPage)->map(function (Article $article) {
-                    return $this->getFeedData($article);
+                    return $article->toArray();
                 })->toArray(),
             ];
         }
@@ -117,6 +118,7 @@ class ArticlesService
     private function getArticles($feed, string $callPage): Collection
     {
         return $feed->articles()
+            ->GetArticle()
             ->with('tags')
             ->with('feed')
             ->with('feed.provider')
@@ -132,21 +134,5 @@ class ArticlesService
             ->get()
             ->shuffle()
             ->take($feed->feed_count);
-    }
-
-    private function getFeedData(Article $article): array
-    {
-        return [
-            'id' => $article->id,
-            'title' => $article->title,
-            'link' => route('track', $article->id),
-            'content' => $article->description ?? $article->content,
-            'thumbnail' => $article->thumbnail,
-            'provider' => $article->feed->provider->name,
-            'provider_link' => $article->feed->provider->home_page ?? '',
-            'feed' => $article->feed->title,
-            'tags' => $article->tags->pluck('name')->implode(', '),
-            'published_at' => $article->published_at->diffForHumans(),
-        ];
     }
 }

@@ -2,8 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Services\ArticlesService;
-use App\Services\FeedsService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
@@ -17,19 +15,6 @@ class TestAppCommand extends Command
     {
         try {
             $this->info("\nStarting tests");
-
-//            $srv = resolve(FeedsService::class);
-//            $feeds = $srv->getFeeds();
-//
-//            foreach ($feeds as $feed) {
-//                $this->info("Feed: {$feed->provider->name} | {$feed->title}");
-//                $srv->importFeed($feed);
-//            }
-
-            $srv = resolve(ArticlesService::class);
-            $articles = $srv->getGrouped();
-
-            dump($articles);
 
             $this->info("\nDone.\n");
 

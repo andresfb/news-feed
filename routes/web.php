@@ -1,8 +1,11 @@
 <?php
 
+use App\Emuns\PageName;
 use App\Http\Controllers\FrontPageController;
 use App\Http\Controllers\GroupedController;
+use App\Http\Controllers\MarkArticleReadController;
 use App\Http\Controllers\ProviderController;
+use App\Http\Controllers\RefreshController;
 use App\Http\Controllers\TrackController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,11 +20,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [FrontPageController::class, 'index'])->name('frontpage');
+Route::get('/', [FrontPageController::class, 'index'])->name(PageName::AllNews->value);
 
-Route::get('/grouped', GroupedController::class)->name('grouped');
+Route::get('/grouped', GroupedController::class)->name(PageName::Grouped->value);
 
-Route::get('/provider/{provider}', ProviderController::class)->name('provider');
+Route::get('/provider/{provider}', ProviderController::class)->name(PageName::Provider->value);
 
 Route::get('/archive', static function () {
     // TODO: implement archive view
@@ -31,7 +34,12 @@ Route::get('/archive', static function () {
     // TODO: in the archive controller add a filters by provider, feed, and date range.
 
     echo 'not implemented yet';
-})->name('archive');
+})->name(PageName::Archive->value);
+
+Route::controller(MarkArticleReadController::class)->group(function () {
+    Route::post('/mark-read/{article}/update', 'update')->name('article.update');
+    Route::delete('/mark-read/{article}/delete', 'delete')->name('article.delete');
+});
 
 Route::get('/track/{article}', TrackController::class)->name('track');
-
+Route::post('/refresh', RefreshController::class)->name('refresh');

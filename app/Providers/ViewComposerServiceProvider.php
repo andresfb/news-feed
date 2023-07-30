@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Emuns\PageName;
 use App\Services\ProviderService;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,13 @@ class ViewComposerServiceProvider extends ServiceProvider
             view()->share('providers', $this->providerService->getList());
 
             view()->share('providerRoutes', $this->providerService->getRoutes());
+
+            foreach (PageName::array() as $value => $name) {
+                view()->share(
+                    Str::of($name)->camel()->toString() . 'Menu',
+                    $value
+                );
+            }
         }
     }
 }
