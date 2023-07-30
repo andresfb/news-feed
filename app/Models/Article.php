@@ -75,13 +75,14 @@ class Article extends Model implements HasMedia
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'link' => route('track', $this->id),
+            'permalink' => $this->permalink,
             'content' => $this->description ?? $this->content,
             'thumbnail' => $this->thumbnail,
             'provider' => $this->feed->provider->name,
             'provider_link' => $this->feed->provider->home_page ?? '',
             'feed' => $this->feed->title,
             'tags' => $this->tags->pluck('name')->implode(', '),
+            'read_at' => $this->read_at ? $this->read_at->diffForHumans() : null,
             'published_at' => $this->published_at->diffForHumans(),
         ];
     }

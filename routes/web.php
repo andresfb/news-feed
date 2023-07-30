@@ -1,6 +1,7 @@
 <?php
 
 use App\Emuns\PageName;
+use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\FrontPageController;
 use App\Http\Controllers\GroupedController;
 use App\Http\Controllers\MarkArticleReadController;
@@ -28,20 +29,12 @@ Route::get('/provider/{provider}', ProviderController::class)->name(PageName::Pr
 
 // TODO: add the new Private Feeds Image of the day feed
 
-Route::get('/archive', static function () {
-    // TODO: implement archive view
-    // TODO: add Meilisearch
-    // TODO: in the archive controller add a search engine
-    // TODO: in the archive controller add load all articles in descending order and paginated (50 per page).
-    // TODO: in the archive controller add a filters by provider, feed, and date range.
-
-    echo 'not implemented yet';
-})->name(PageName::Archive->value);
+Route::get('/archive', [ArchiveController::class, 'index'] )->name(PageName::Archive->value);
 
 Route::controller(MarkArticleReadController::class)->group(function () {
     Route::post('/mark-read/{article}/update', 'update')->name('article.update');
     Route::delete('/mark-read/{article}/delete', 'delete')->name('article.delete');
 });
 
-Route::get('/track/{article}', TrackController::class)->name('track');
+Route::get('/track/{article}/{callPage}', TrackController::class)->name('track');
 Route::post('/refresh', RefreshController::class)->name('refresh');

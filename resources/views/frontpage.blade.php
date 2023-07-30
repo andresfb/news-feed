@@ -8,6 +8,10 @@
             </span>
         </div>
 
+    </section>
+
+    <section>
+
         <ul class="px-1 mt-1">
         @foreach($articles as $article)
             <li class="flex justify-items-start pb-1 px-1 lg:px-2 gap-2 lg:gap-3 even:bg-gray-100 odd:bg-white rounded-sm">
@@ -26,17 +30,23 @@
                         <span class="text-xs lg:text-sm mr-0 lg:mr-1"><small>-</small></span>
                         <span class="text-xs lg:text-sm text-gray-500 font-semibold"><small>{{ $article['feed'] }}</small></span>
                     </div>
+
                     <div class="text-sm lg:text-base font-medium lg:font-semibold mt-1">
-                        <a href="{{ $article['link'] }}" target="_blank">{!! html_entity_decode($article['title'], ENT_QUOTES, 'UTF-8') !!}</a>
+                        <a href="{{ route('track', [$article['id'], $allNewsMenu]) }}" target="_blank">
+                            {!! html_entity_decode($article['title'], ENT_QUOTES, 'UTF-8') !!}
+                        </a>
                     </div>
+
                     <div class="text-xs lg:text-sm text-gray-500 mt-1">
                         {!! $article['content'] !!}
                     </div>
+
                 @if(!empty($article['tags']))
                     <div class="mt-1">
                         <span class="text-xs lg:text-sm text-gray-700"><small>{{ $article['tags'] }}</small></span>
                     </div>
                 @endif
+
                     <div class="flex justify-between mt-2">
                         <div>
                             <span class="text-xs lg:text-sm text-gray-800">

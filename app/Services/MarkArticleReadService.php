@@ -12,7 +12,6 @@ class MarkArticleReadService
     {
         $article = Article::GetArticle()
             ->whereId($articleId)
-            ->whereNull('read_at')
             ->with('feed')
             ->with('feed.provider')
             ->first();
@@ -47,9 +46,9 @@ class MarkArticleReadService
 
             return $item;
         })
-            ->reject(function ($item) {
-                return $item === null;
-            });
+        ->reject(function ($item) {
+            return $item === null;
+        });
 
         foreach (PageName::values() as $value) {
             if ($value === $callPage) {

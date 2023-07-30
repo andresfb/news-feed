@@ -39,8 +39,9 @@
                     @endif
 
                         <div class="text-sm lg:text-base font-medium lg:font-semibold mt-1">
-                            <a href="{{ $article['link'] }}"
-                               target="_blank">{!! html_entity_decode($article['title'], ENT_QUOTES, 'UTF-8') !!}</a>
+                            <a href="{{ route('track', [$article['id'], $callPage]) }}" target="_blank">
+                                {!! html_entity_decode($article['title'], ENT_QUOTES, 'UTF-8') !!}
+                            </a>
                         </div>
 
                     @if(empty($article['content']))
@@ -56,9 +57,9 @@
                     @endif
                         <div class="flex justify-between mt-2">
                             <div>
-                            <span class="text-xs lg:text-sm text-gray-800">
-                                <small>Published: {{ $article['published_at'] }}</small>
-                            </span>
+                                <span class="text-xs lg:text-sm text-gray-800">
+                                    <small>Published: {{ $article['published_at'] }}</small>
+                                </span>
                             </div>
 
                             <form action="{{ route('article.update', $article['id']) }}" method="post">
