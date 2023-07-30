@@ -26,6 +26,8 @@ Route::get('/grouped', GroupedController::class)->name(PageName::Grouped->value)
 
 Route::get('/provider/{provider}', ProviderController::class)->name(PageName::Provider->value);
 
+// TODO: add the new Private Feeds Image of the day feed
+
 Route::get('/archive', static function () {
     // TODO: implement archive view
     // TODO: add Meilisearch
