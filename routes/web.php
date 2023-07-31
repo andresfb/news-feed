@@ -2,6 +2,7 @@
 
 use App\Emuns\PageName;
 use App\Http\Controllers\ArchiveController;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\FrontPageController;
 use App\Http\Controllers\GroupedController;
 use App\Http\Controllers\MarkArticleReadController;
@@ -27,8 +28,6 @@ Route::get('/grouped', GroupedController::class)->name(PageName::Grouped->value)
 
 Route::get('/provider/{provider}', ProviderController::class)->name(PageName::Provider->value);
 
-// TODO: add the new Private Feeds Image of the day feed
-
 Route::get('/archive', [ArchiveController::class, 'index'] )->name(PageName::Archive->value);
 
 Route::controller(MarkArticleReadController::class)->group(function () {
@@ -37,4 +36,7 @@ Route::controller(MarkArticleReadController::class)->group(function () {
 });
 
 Route::get('/track/{article}/{callPage}', TrackController::class)->name('track');
+
 Route::post('/refresh', RefreshController::class)->name('refresh');
+
+Route::get('/ajax/feeds', FeedController::class)->name('ajax.feeds');
