@@ -21,26 +21,22 @@ class ImportFeedsJob implements ShouldQueue
 
     private int $delaySeconds = 0;
 
-    public function __construct(private readonly FeedsService $service)
-    {
-    }
-
     /**
      * @throws Exception
      */
-    public function handle(): void
+    public function handle(FeedsService $service): void
     {
         try {
             Cache::tags('all_news')->flush();
 
-            $feeds = $this->service->getFeeds();
+            $feeds = $service->getFeeds();
             if ($feeds->isEmpty()) {
                 Log::info('No feeds to import');
                 return;
             }
 
             foreach ($feeds as $feed) {
-                ImportFeedJob::dispatch($feed, $this->service)
+                ImportFeedJob::dispatch($feed, $service)
                     ->delay(now()->addSeconds($this->delaySeconds));
 
                 $this->delaySeconds += 5;

@@ -14,11 +14,51 @@
     @endif
     </section>
 
-    <section>
+    <section class="mt-5 p-1 lg:p-2">
+
+        <div x-data="{ show: false }">
+
+            <button @click="show = !show"
+                type="button"
+                class="text-blue-700
+                    hover:text-white
+                    border
+                    border-blue-700
+                    hover:bg-blue-800
+                    focus:ring-4
+                    focus:outline-none
+                    focus:ring-blue-300
+                    font-medium
+                    rounded-md
+                    text-xs
+                    lg:text-sm
+                    px-2
+                    lg:px-3
+                    py-0.5
+                    inline-flex
+                    text-center">Quick List</button>
+
+            <div x-show="show" class="mt-3">
+                <div class="grid gap-2 md:gap-3 lg:gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 p-1 lg:p-2">
+                @foreach($providers as $provider)
+                    <small class="text-xs lg:text-sm font-bold text-gray-700">
+                        <a href="#{{ $provider['id'] }}">{{ $provider['name'] }}</a>
+                    </small>
+                @endforeach
+                </div>
+
+                <hr class="mt-2">
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="mt-3">
     @foreach($providers as $provider)
         <div class="p-1 lg:p-2">
             <div class="text-base lg:text-lx font-bold text-gray-700 my-2">
-                <a href="{{ $provider['provider_link'] }}">{{ $provider['name'] }}</a>
+                <a id="{{ $provider['id'] }}" href="{{ $provider['provider_link'] }}">{{ $provider['name'] }}</a>
             </div>
 
         @foreach($provider['feeds'] as $feed)

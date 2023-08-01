@@ -14,6 +14,7 @@ class ArchiveController extends Controller
             'feed' => ['nullable', 'integer', 'exists:feeds,id'],
             'from_date' => ['nullable', 'date', 'date_format:Y-m-d'],
             'to_date' => ['nullable', 'date', 'date_format:Y-m-d'],
+            'status' => ['nullable', 'string', 'in:read,unread,all'],
             'per_page' => ['nullable', 'integer', 'min:1', 'max:50'],
             'page' => ['nullable', 'integer'],
         ]);
@@ -29,8 +30,14 @@ class ArchiveController extends Controller
                 'feeds' => $service->getFeeds(),
                 'selectedProvider' => $service->providerId(),
                 'selectedFeed' => $service->feedId(),
+                'selectedStatus' => $service->status(),
                 'fromDate' => $service->fromDate()?->format('Y-m-d') ?? '',
                 'toDate' => $service->toDate()?->format('Y-m-d') ?? '',
+                'statuses' => [
+                    'all' => 'All',
+                    'read' => 'Read',
+                    'unread' => 'Unread',
+                ],
             ]);
     }
 }

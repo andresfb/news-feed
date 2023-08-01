@@ -51,6 +51,12 @@ class ArchiveService
             $query->whereDate('created_at', '<=', $this->toDate());
         }
 
+        if ($this->status() === 'read') {
+            $query->whereNotNull('read_at');
+        } elseif ($this->status() === 'unread') {
+            $query->whereNull('read_at');
+        }
+
         $this->articleCount = $query->count();
 
         $this->articles = $query->paginate($this->perPage());
@@ -121,5 +127,10 @@ class ArchiveService
         }
 
         return Carbon::parse($this->params['to_date']);
+    }
+
+    public function status(): string
+    {
+        return $this->params['status'] ?? 'all';
     }
 }

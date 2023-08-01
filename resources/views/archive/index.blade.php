@@ -3,14 +3,14 @@
     <section class="my-7">
 
         <form action="{{ route('archive') }}" method="get">
-            <div x-data="dropdown()"
-                 x-init="loadFeeds({{ $selectedProvider }})"
-                 class="flex-row md:flex space-y-3 md:space-y-0 md:justify-between md:gap-3 lg:gap-4">
+            <div class="flex-row md:flex space-y-3 md:space-y-0 md:justify-between md:gap-3 lg:gap-4">
 
-                <div class="w-full">
-                    <label for="providers" class="block mb-2 text-sm font-medium text-gray-900">Select a Provider</label>
+                <div x-data="dropdown()"
+                     x-init="loadFeeds({{ $selectedProvider }})"
+                     class="w-full">
+                    <label for="provider" class="block mb-2 text-sm font-medium text-gray-900">Select a Provider</label>
                     <select @change="loadFeeds($event.target.value)"
-                        id="providers"
+                        id="provider"
                         name="provider"
                         class="bg-gray-50
                             border
@@ -49,6 +49,27 @@
                         <template x-for="feed in feeds">
                             <option x-bind:value="feed.id" x-text="feed.title" x-bind:selected="feed.id === {{ $selectedFeed }}"></option>
                         </template>
+                    </select>
+                </div>
+
+                <div class="w-full">
+                    <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Read Status</label>
+                    <select id="status"
+                        name="status"
+                        class="bg-gray-50
+                            border
+                            border-gray-300
+                            text-gray-900
+                            text-sm
+                            rounded-lg
+                            focus:ring-blue-500
+                            focus:border-blue-500
+                            block
+                            w-full
+                            p-2.5">
+                        @foreach($statuses as $id => $status)
+                            <option value="{{ $id }}" @if($id === old('status', $selectedStatus)) selected @endif >{{ $status }}</option>
+                        @endforeach
                     </select>
                 </div>
 
